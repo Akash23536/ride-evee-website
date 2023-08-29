@@ -8,6 +8,7 @@ import Bookings from "./components/bookings/Bookings";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Confirmed from "./components/confirmed/Confirmed";
 import ContactUs from "./components/contact/ContactUs";
+import SelectCar from "./components/selectCar/SelectCar";
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
           <Route path="/about" element={<About />} />
           <Route path="/confirmed" element={<Confirmed />} />
           <Route path="/contact" element={<ContactUs />} />
+          <Route path="/selectcar" element={<SelectCar />} />
         </Routes>
       </BrowserRouter>
     </>

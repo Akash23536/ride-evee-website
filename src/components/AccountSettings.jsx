@@ -1,3 +1,4 @@
+import Footer from "./Footer";
 import Account from "./account/Account";
 import Nav from "./bookings/Nav";
 
@@ -28,6 +29,7 @@ const AccountSettings = () => {
         </div>
       </div>
       <Account></Account>
+      <Footer />
     </div>
   );
 };

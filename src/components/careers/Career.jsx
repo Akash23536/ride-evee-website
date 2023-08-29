@@ -1,4 +1,3 @@
-import React from "react";
 import "./Career.css";
 // import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 // import { Button, IconButton } from "@mui/material";

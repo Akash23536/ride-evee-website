@@ -1,8 +1,6 @@
 import { useState } from "react";
 import logo from "../../assets/logo.png";
 import navicon from "../../assets/nav.png";
-
-import { AiOutlineCloseCircle } from "react-icons/ai";
 import ModalProfile from "./ModalProfile";
 
 const Nav = () => {
@@ -18,9 +16,11 @@ const Nav = () => {
     <div className="w-full">
       <header className="bg-white">
         <nav className="flex flex-row justify-between items-center w-[99%]">
-          <div className="pl-[32px] justify-start items-start laptop:flex">
+          <a
+            href="/"
+            className="pl-[32px] justify-start items-start laptop:flex">
             <img className="w-[158px] m-4" src={logo} alt="" />
-          </div>
+          </a>
 
           <div className="relative">
             <img className="w-[358px]" src={navicon} alt="" />

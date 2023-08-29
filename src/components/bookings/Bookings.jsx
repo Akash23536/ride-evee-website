@@ -5,6 +5,7 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import { FiCheckCircle } from "react-icons/fi";
+import Footer from "../Footer";
 
 const Bookings = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -134,6 +135,7 @@ const Bookings = () => {
           </div>
         </Tabs>
       </div>
+      <Footer />
     </div>
   );
 };

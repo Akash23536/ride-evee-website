@@ -1,5 +1,6 @@
 import Nav from "../bookings/Nav";
 import img from "../../assets/confirmed.png";
+import Footer from "../Footer";
 const Confirmed = () => {
   return (
     <div>
@@ -87,6 +88,7 @@ const Confirmed = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
