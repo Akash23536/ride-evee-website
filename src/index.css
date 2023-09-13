@@ -19,3 +19,7 @@
   box-shadow: 0px 4px 22px 0px rgba(0, 0, 0, 0.1);
   color: "#60A547";
 }
+.blurred-background {
+  filter: blur(4px); /* Adjust the blur amount as needed */
+  pointer-events: none; /* Prevent interaction with the blurred background */
+}

@@ -1,6 +1,6 @@
 // eslint-disable-next-line react/prop-types
 const ModalProfile = ({ open }) => {
-  console.log(open);
+  // console.log(open);
 
   return (
     open && (
