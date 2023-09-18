@@ -16,9 +16,6 @@ import car2 from "../assets/car-1057 1.png";
 import driving from "../assets/driving2.png";
 import people1 from "../assets/people2.png";
 import money1 from "../assets/moneys.png";
-import { Location } from "iconsax-react";
-import { Calendar } from "iconsax-react";
-import { Clock } from "iconsax-react";
 import Nav from "./bookings/Nav";
 import Footer from "./Footer";
 import BookCab from "./home/BookCab";
@@ -28,140 +25,8 @@ const Home = () => {
     <>
       <Nav></Nav>
 
-      {/*Hero Section  */}
-      {/* <div className="mobile:w-auto tablet:w-auto laptop:w-auto desktop:w-auto mobile:p-[150px] tablet:p-[100px] md:p-[75px] deskto:p-[50px] ">
-        <div className="box-content h-532px w-1289px justify-between items-center border-2">
-          <ul className="flex">
-            <li className="px-4 hover:bg-[#60A547]  w-[179px] h-[70px] text-center align-middle">
-              <h1 className="align-middle mt-6 text-[18px] group-hover:text-[#FFF]">
-                Local
-              </h1>
-            </li>
-            <li className="px-4 hover:bg-[#60A547] w-[179px] h-[70px] text-center align-middle">
-              <h1 className="align-middle mt-6 text-[18px] group-hover:text-[#FFF]">
-                Outstation
-              </h1>
-            </li>
-            <li className="px-4 hover:bg-[#60A547] w-[179px] h-[70px] text-center align-middle">
-              <h1 className="align-middle mt-6 text-[18px] hover:text-[#FFF]">
-                Airpot Transfer
-              </h1>
-            </li>
-          </ul>
-          <div>
-            <ul className="flex pt-[40px] pl-[161px] gap-[8vw]">
-              <li className="border-2 border-[#60A547] w-[165px] h-[53px] rounded-sm">
-                <button className="rounded-[5px] hover:bg-[#60A547] w-[154px] h-[45px] ">
-                  OneWay
-                </button>
-              </li>
-              <li className="border-2 border-[#60A547] w-[165px] h-[53px] rounded-sm">
-                <button className="rounded-[5px] hover:bg-[#60A547] w-[154px] h-[45px]">
-                  RoundTrip
-                </button>
-              </li>
-            </ul>
-          </div>
-          <div className="flex ">
-            <ul
-              className="pt-[50px] pl-[63px] justify-start items-start "
-              style={{
-                color: `#4F4F4F`,
-                fontFamily: `MTT Milano`,
-                fontSize: `23.509px`,
-                fontStyle: `normal`,
-                fontWeight: `500`,
-                lineHeight: `normal`,
-                textTransform: `uppercase`,
-              }}>
-              <li className="flex pt-[50px] border-b-2 border-[#60A547] gap-[1vw]">
-                <Location size="32" color="#727272" />
-                <input placeholder="From City" />
-              </li>
-              <li className="flex pt-[50px] border-b-2 border-[#60A547] gap-[1vw]">
-                <Location size="32" color="#727272" />
-                <input placeholder="To City" />
-              </li>
-              <div>
-                <ul className="flex gap-[4vw]">
-                  <li className="flex pt-[50px] border-b-2  md:border-b-6 border-[#60A547] gap-[1vw]">
-                    <Calendar size="32" color="#727272" />
-                    <input placeholder="Date" />
-                  </li>
-                  <li className="flex pt-[50px] border-b-2  border-[#60A547] gap-[1vw]">
-                    <Clock size="32" color="#727272" />
-                    <input placeholder="Time" />
-                  </li>
-                </ul>
-              </div>
-              <div className="justify-start items-start pt-[40px] ">
-                <button className="justify-start items-baseline bg-[#60A547] w-[760px] h-[85px] ml-0">
-                  <p
-                    style={{
-                      color: `#FFF`,
-                      fontFamily: `MTT Milano`,
-                      fontSize: `36px`,
-                      fontStyle: `normal`,
-                      fontWeight: `500`,
-                      lineHeight: `normal`,
-                    }}>
-                    Book Your Cab Now !
-                  </p>
-                </button>
-              </div>
-            </ul>
-
-            <div className="flex relative bg-gradient-to-b from-[#CDFF34] to-[#E6EB7B] w-[480.492px] h-[490px] rounded-t-lg right-0 ml-auto mb-auto ">
-              <img
-                src={car}
-                alt=""
-                className="md:w-auto absolute bottom-0 md:min-w-auto md:min-h-auto w-[623.108px] h-[302.979px] "
-              />
-            </div>
-          </div>
-        </div>
-      </div> */}
       <BookCab></BookCab>
 
-      {/* <div>
-        <div>
-          <h1 className="pl-[250px] pt-[92px] pr-[28px] text-[#60A547] text-[44px] font-[800] uppercase">
-            ​India's Leading One-Way Inter-City Cab Service Provider
-          </h1>
-        </div>
-        <div className="flex">
-          <ul className="flex flex-row">
-            <li className="pl-[150px] pt-[139px]">
-              <img src={Image1} className="w-[500px] h-[300px]" />
-            </li>
-            <li className="">
-              <img src={Image2} alt="" className="pl-[250px] pt-[121px]" />
-              <h2 className="text-[#60A547] font-[500] uppercase pl-[200px] pt-[22px] text-[24px]">
-                Return Fare, Not Fair!
-              </h2>
-              <p className="box-content pl-[200px] text-[20px] uppercase">
-                Why Pay for Return Journey <br />
-                when you are travelling one-
-                <br />
-                way? Now get discounted AC
-                <br />
-                Taxi at just half of the round
-                <br />
-                trip cost for your one-way travel.
-              </p>
-            </li>
-            <li>
-              <img src={Image3} className="pl-[315px] pt-[118px] pr-[201px]" />
-              <h2 className="text-[#60A547] font-[500] uppercase pl-[225px] pt-[37px] text-[24px]">
-                Return Fare, Not Fair!
-              </h2>
-              <p className="box-content pl-[225px] text-[20px] uppercase">
-                Lucknow | Gorakhpur |<br /> Varanasi | Allahabad | Bareilly
-              </p>
-            </li>
-          </ul>
-        </div>
-      </div> */}
       <div className="w-full">
         <div>
           <h1 className="text-center text-[#60A547] text-[44px] font-[800] uppercase">
@@ -197,19 +62,22 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="my-5">
+      <div className="my-5 px-20">
         <div
+          className="w-full bg-cover "
           style={{
             backgroundImage: `url(${Banner})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
+            // backgroundSize: "cover",
+            // backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            height: "45vh",
           }}>
-          <div className="bg-gradient-to-r from-black via-[#60A547] to-transparent bg-black bg-opacity-40 h-screen flex ps-20 items-center">
-            <div className="w-3/5  text-white space-y-6">
-              <h1 className="text-5xl font-bold">
+          <div className="bg-gradient-to-r via-black from-[#60A547] to-transparent bg-black  bg-opacity-50 h-[45vh] flex ps-20 items-center">
+            <div className="w-3/5  text-white space-y-2">
+              <h1 className="text-3xl font-bold">
                 Why choose AC Bus or AC Train <br /> for your One-way Journey?
               </h1>
-              <p className="text-xl">
+              <p className="">
                 Our one-way cab service is cheaper than AC bus and 2-tier AC
                 train ticket fares. It reduces your travel time, and you travel
                 at your own private space to enjoy your journey. Our one-way
@@ -221,8 +89,6 @@ const Home = () => {
             </div>
           </div>
         </div>
-
-        {/* <img src={Banner} alt="" className="w-full h-[582px] pt-[151px]" /> */}
       </div>
 
       {/* Banner2 */}

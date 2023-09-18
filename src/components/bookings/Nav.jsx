@@ -29,7 +29,7 @@ const Nav = () => {
             </p>
           </div>
 
-          <div className=" bg-white min-h-fit xl:min-h-[20vh] flex flex-row">
+          <div className=" bg-white min-h-fit xl:min-h-[8vh] flex flex-row">
             <button className="block :hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

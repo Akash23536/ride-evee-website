@@ -1,21 +1,17 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { useForm } from "react-hook-form";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { AiOutlineClockCircle } from "react-icons/ai";
 import { BiCalendar, BiMap } from "react-icons/bi";
-import { PiAirplaneTiltBold } from "react-icons/pi";
-import { useForm } from "react-hook-form";
-import { useRef } from "react";
+import { AiOutlineClockCircle } from "react-icons/ai";
 
-const AirportTransfer = () => {
+const Local = () => {
   const { handleSubmit, register, setValue } = useForm();
   const [startDate, setStartDate] = useState(null);
-  const [fromIsFocus, setFromIsFocus] = useState(false);
-  const [tripIsFocus, setTripIsFocus] = useState(false);
+  const [isFocus, setIsFocus] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const inputRef = useRef();
-  const [fromInputValue, setFromInputValue] = useState("");
-  const [tripInputValue, setTripInputValue] = useState("");
+  const [inputValue, setInputValue] = useState("");
 
   const suggestions = [
     "New York",
@@ -25,17 +21,15 @@ const AirportTransfer = () => {
     "Seattle",
   ];
 
-  const tripTypeSuggestions = ["Business", "Leisure", "Adventure", "Family"];
-
-  const airportSubmit = (data) => {
+  const localSubmit = (data) => {
     console.log("Form data", data);
   };
 
   return (
     <div className="w-full normal-case">
       <div className="px-3 pt-2">
-        <form onSubmit={handleSubmit(airportSubmit)}>
-          <div className="p-4 flex gap-14">
+        <form onSubmit={handleSubmit(localSubmit)}>
+          <div className="p-4 w-full flex justify-between  gap-14">
             <div className="relative">
               <label htmlFor="from" className="normal-case ps-2 font-bold">
                 From
@@ -46,23 +40,23 @@ const AirportTransfer = () => {
                 {...register("from")}
                 className="w-full border-b p-2"
                 placeholder="Start typing city"
-                onFocus={() => setFromIsFocus(true)}
+                onFocus={() => setIsFocus(true)}
                 onBlur={() => {
                   if (!isHovered) {
-                    setFromIsFocus(false);
+                    setIsFocus(false);
                   }
                 }}
-                value={fromInputValue}
+                value={inputValue}
                 onChange={(e) => {
-                  setFromInputValue(e.target.value);
-                  setValue("from", e.target.value);
+                  setInputValue(e.target.value);
+                  setValue("from", e.target.value); // Set the value using setValue
                 }}
                 ref={inputRef}
               />
               <BiMap className="absolute text-3xl top-10 right-0" />
-              {fromIsFocus && (
+              {isFocus && (
                 <div
-                  className="shadow-lg absolute bg-white w-full z-50"
+                  className="shadow-lg absolute bg-white w-full"
                   onMouseEnter={() => {
                     setIsHovered(true);
                   }}
@@ -73,15 +67,14 @@ const AirportTransfer = () => {
                     const isMatch =
                       suggestion
                         .toLowerCase()
-                        .indexOf(fromInputValue.toLowerCase()) > -1;
+                        .indexOf(inputValue.toLowerCase()) > -1;
                     return (
                       <div key={index}>
                         {isMatch && (
                           <div
                             className="p-2 hover:bg-gray-200 cursor-pointer"
                             onClick={() => {
-                              setValue("from", suggestion);
-                              setFromInputValue(suggestion);
+                              setValue("from", suggestion); // Set the value using setValue
                               inputRef.current.focus();
                             }}>
                             {suggestion}
@@ -93,10 +86,6 @@ const AirportTransfer = () => {
                 </div>
               )}
             </div>
-            {/* <AiOutlineSwap
-              onClick={handleSwap}
-              className="text-4xl cursor-pointer my-auto"
-            /> */}
 
             <div className="relative">
               <label
@@ -118,8 +107,9 @@ const AirportTransfer = () => {
                 closeOnScroll={true}
                 placeholderText="Select a date"
               />
-              <BiCalendar className="absolute text-3xl top-10 right-0" />
+              <BiCalendar className="absolute text-3xl zz top-10 right-4" />
             </div>
+
             <div className=" relative">
               <label
                 htmlFor="pickUpTime"
@@ -234,68 +224,10 @@ const AirportTransfer = () => {
               <AiOutlineClockCircle className="absolute text-3xl top-10 right-0" />
             </div>
           </div>
-          <div className="relative w-3/5  px-3 ">
-            <label htmlFor="trip" className="ps-2 normal-case font-bold">
-              Trip Type
-            </label>
-            <input
-              type="text"
-              id="trip"
-              {...register("trip")}
-              className="w-full border-b p-2"
-              placeholder="Start typing trip type"
-              onFocus={() => setTripIsFocus(true)}
-              onBlur={() => {
-                if (!isHovered) {
-                  setTripIsFocus(false);
-                }
-              }}
-              value={tripInputValue}
-              onChange={(e) => {
-                setTripInputValue(e.target.value);
-                setValue("trip", e.target.value);
-              }}
-              ref={inputRef}
-            />
-            <PiAirplaneTiltBold className="absolute text-3xl top-10 right-4" />
-            {tripIsFocus && (
-              <div
-                className="shadow-lg absolute bg-white w-full z-50"
-                onMouseEnter={() => {
-                  setIsHovered(true);
-                }}
-                onMouseLeave={() => {
-                  setIsHovered(false);
-                }}>
-                {tripTypeSuggestions.map((suggestion, index) => {
-                  const isMatch =
-                    suggestion
-                      .toLowerCase()
-                      .indexOf(tripInputValue.toLowerCase()) > -1;
-                  return (
-                    <div key={index}>
-                      {isMatch && (
-                        <div
-                          className="p-2 hover:bg-gray-200 cursor-pointer"
-                          onClick={() => {
-                            setTripInputValue(suggestion);
-                            setValue("trip", suggestion);
-                            inputRef.current.focus();
-                          }}>
-                          {suggestion}
-                        </div>
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
-            )}
-          </div>
-
           <div className="flex justify-center py-5">
             <button
               type="submit"
-              className="bg-[#60a547]  text-white py-2 px-4 rounded">
+              className="bg-[#60a547] text-white py-2 px-4 rounded">
               Explore Cabs
             </button>
           </div>
@@ -305,4 +237,4 @@ const AirportTransfer = () => {
   );
 };
 
-export default AirportTransfer;
+export default Local;

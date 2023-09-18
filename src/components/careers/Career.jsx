@@ -8,10 +8,12 @@ import group from "../../assets/group.png";
 import Nav from "../bookings/Nav";
 import carrer from "../../assets/carrer.png";
 import Footer from "../Footer";
+import BookCab from "../home/BookCab";
 const Career = () => {
   return (
     <div>
       <Nav></Nav>
+      <BookCab />
       <div className="career_container ">
         <div className=" ">
           <div
