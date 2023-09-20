@@ -9,9 +9,9 @@ import Local from "./Local";
 const BookCab = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   return (
-    <div className="w-full">
-      <div className=" justify-between py-3  px-28 items-center">
-        <div className="flex shadow-xl rounded-lg  justify-center ">
+    <div className="w-full absolute top-3 z-40">
+      <div className=" justify-between py-3   px-28 items-center">
+        <div className="flex shadow-xl rounded-lg pt-4 bg-white justify-center ">
           <ul
             className="justify-start items-start "
             style={{

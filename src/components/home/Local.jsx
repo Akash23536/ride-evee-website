@@ -224,7 +224,7 @@ const Local = () => {
               <AiOutlineClockCircle className="absolute text-3xl top-10 right-0" />
             </div>
           </div>
-          <div className="flex justify-center py-5">
+          <div className="flex justify-center pb-5">
             <button
               type="submit"
               className="bg-[#60a547] text-white py-2 px-4 rounded">

@@ -19,43 +19,44 @@ import money1 from "../assets/moneys.png";
 import Nav from "./bookings/Nav";
 import Footer from "./Footer";
 import BookCab from "./home/BookCab";
+import Banners from "./home/Banners";
 
 const Home = () => {
   return (
     <>
       <Nav></Nav>
+      <div className="relative">
+        <Banners />
+        <BookCab className=""></BookCab>
+      </div>
 
-      <BookCab></BookCab>
-
-      <div className="w-full">
+      <div className="w-full py-3">
         <div>
-          <h1 className="text-center text-[#60A547] text-[44px] font-[800] uppercase">
+          <h1 className="text-center text-[#60A547] text-2xl font-bold uppercase">
             ​India's Leading One-Way Inter-City Cab Service Provider
           </h1>
         </div>
-        <div className=" flex gap-10 justify-center px-10">
+        <div className=" gap-10 justify-around grid grid-cols-3 px-52">
           <li>
-            <img src={Image1} alt="Image 1" className="w-[500px] h-[300px]" />
+            <img src={Image1} alt="Image 1" className="w-[300px] h-[200px]" />
           </li>
           <li>
             <img src={Image2} alt="Image 2" className="mx-auto" />
-            <h2 className="text-[#60A547] font-semibold uppercase text-2xl mt-4">
+            <h2 className="text-[#60A547] text-center font-semibold uppercase text-xl mt-4">
               Return Fare, Not Fair!
             </h2>
-            <p className="text-[20px] mt-2">
-              Why Pay for Return Journey <br />
-              when you are traveling one- <br />
-              way? Now get discounted AC <br />
-              Taxi at just half of the round <br />
-              trip cost for your one-way travel.
+            <p className="text-center mt-2">
+              Why Pay for Return Journey when you are traveling one- way? Now
+              get discounted AC Taxi at just half of the round trip cost for
+              your one-way travel.
             </p>
           </li>
           <li>
             <img src={Image3} alt="Image 3" className="mx-auto" />
-            <h2 className="text-[#60A547] font-semibold uppercase text-2xl mt-4">
+            <h2 className="text-[#60A547] text-center font-semibold uppercase text-xl mt-4">
               Return Fare, Not Fair!
             </h2>
-            <p className="text-[20px] mt-2">
+            <p className="text-center mt-2">
               Lucknow | Gorakhpur | <br /> Varanasi | Allahabad | Bareilly
             </p>
           </li>

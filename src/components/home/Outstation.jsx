@@ -122,7 +122,7 @@ const Outstation = () => {
                 </div>
                 <AiOutlineSwap
                   onClick={handleSwap}
-                  className="text-4xl cursor-pointer my-auto"
+                  className="text-4xl cursor-pointer mt-8"
                 />
                 <div className=" relative">
                   <label htmlFor="to" className="normal-case ps-2 font-bold">
@@ -391,7 +391,7 @@ const Outstation = () => {
                 </div>
                 <AiOutlineSwap
                   onClick={handleSwap}
-                  className="text-4xl cursor-pointer my-auto"
+                  className="text-5xl cursor-pointer  mt-7"
                 />
                 <div className=" relative">
                   <label htmlFor="to" className="normal-case ps-2 font-bold">
