@@ -6,6 +6,7 @@ import Image1 from "../assets/seodata-image 1.png";
 import Image2 from "../assets/hand-holding-up-a-sprout-svgrepo-com 1.png";
 import Image3 from "../assets/driving.png";
 import Banner from "../assets/sceenback.png";
+import city from "../assets/citypp.png";
 import image from "../assets/image 5.png";
 import flag from "../assets/flag.png";
 import mobile from "../assets/mobile.png";
@@ -32,7 +33,7 @@ const Home = () => {
 
       <div className="w-full py-3">
         <div>
-          <h1 className="text-center text-[#60A547] text-2xl font-bold uppercase">
+          <h1 className="text-center text-[#60A547] text-5xl font-bold uppercase">
             ​India's Leading One-Way Inter-City Cab Service Provider
           </h1>
         </div>
@@ -63,22 +64,22 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="my-5 px-20">
+      <div className="my-5">
         <div
-          className="w-full bg-cover "
+          className="w-full bg-cover"
           style={{
-            backgroundImage: `url(${Banner})`,
+            backgroundImage: `url(${city})`,
             // backgroundSize: "cover",
             // backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
-            height: "45vh",
+            height: "582px",
           }}>
-          <div className="bg-gradient-to-r via-black from-[#60A547] to-transparent bg-black  bg-opacity-50 h-[45vh] flex ps-20 items-center">
-            <div className="w-3/5  text-white space-y-2">
-              <h1 className="text-3xl font-bold">
+          <div className="bg-gradient-to-r via-black from-[#60A547] to-transparent bg-black  bg-opacity-50 h-[582px] flex ps-20 items-center">
+            <div className="w-3/5  text-white space-y-8">
+              <h1 className="text-5xl font-bold">
                 Why choose AC Bus or AC Train <br /> for your One-way Journey?
               </h1>
-              <p className="">
+              <p className="text-3xl">
                 Our one-way cab service is cheaper than AC bus and 2-tier AC
                 train ticket fares. It reduces your travel time, and you travel
                 at your own private space to enjoy your journey. Our one-way
@@ -86,7 +87,7 @@ const Home = () => {
                 destination. So book your one-way cab from Lucknow to Gorakhpur
                 or Varanasi to Bareilly.{" "}
               </p>
-              <p className="">Read More...</p>
+              <p className="text-3xl">Read More...</p>
             </div>
           </div>
         </div>

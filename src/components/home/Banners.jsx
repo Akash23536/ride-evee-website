@@ -22,8 +22,9 @@ const Banner = () => {
     <div className="w-full">
       <Swiper
         effect={"fade"}
+        loop={true}
         autoplay={{
-          delay: 1000,
+          delay: 3000,
           disableOnInteraction: false,
         }}
         modules={[Pagination, EffectFade, Autoplay]}

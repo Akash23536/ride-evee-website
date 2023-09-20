@@ -10,12 +10,11 @@ const BookCab = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   return (
     <div className="w-full absolute top-3 z-40">
-      <div className=" justify-between py-3   px-28 items-center">
+      <div className=" justify-between py-3   px-40 items-center">
         <div className="flex shadow-xl rounded-lg pt-4 bg-white justify-center ">
           <ul
             className="justify-start items-start "
             style={{
-              fontSize: `23.509px`,
               fontStyle: `normal`,
               fontWeight: `500`,
               lineHeight: `normal`,
@@ -25,14 +24,14 @@ const BookCab = () => {
               onSelect={(index) => setActiveIndex(index)}>
               <TabList className="flex gap-8 justify-center">
                 <Tab
-                  className={`no-underline text-[#60A547] cursor-pointer py-3 px-7 text-xl 
+                  className={`no-underline text-[#60A547] cursor-pointer py-1 px-7 text-xl 
                         ${activeIndex === 0 ? "active-tab" : "unactive-tab"}`}>
                   <div className="flex gap-3 items-center">
                     <BiSolidBuildings /> Outstation
                   </div>
                 </Tab>
                 <Tab
-                  className={`no-underline text-[#60A547] cursor-pointer py-3 px-7 text-xl 
+                  className={`no-underline  text-[#60A547] cursor-pointer py-1 px-7 text-xl
                         ${activeIndex === 1 ? "active-tab" : "unactive-tab"}`}>
                   <div className="flex gap-3 items-center">
                     <AiFillCar /> Local
@@ -40,7 +39,7 @@ const BookCab = () => {
                 </Tab>
 
                 <Tab
-                  className={`no-underline text-[#60A547] cursor-pointer py-3 px-7 text-xl 
+                  className={`no-underline text-[#60A547] cursor-pointer py-1 px-7 text-xl 
                         ${activeIndex === 2 ? "active-tab" : "unactive-tab"}`}>
                   <div className="flex gap-3 items-center">
                     <BsAirplaneEngines /> Airport Transfer

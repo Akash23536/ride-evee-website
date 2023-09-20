@@ -37,7 +37,9 @@ const AirportTransfer = () => {
         <form onSubmit={handleSubmit(airportSubmit)}>
           <div className="p-4 flex gap-14">
             <div className="relative">
-              <label htmlFor="from" className="normal-case ps-2 font-bold">
+              <label
+                htmlFor="from"
+                className="normal-case ps-2 font-bold text-xl">
                 From
               </label>
               <input
@@ -59,7 +61,7 @@ const AirportTransfer = () => {
                 }}
                 ref={inputRef}
               />
-              <BiMap className="absolute text-3xl top-10 right-0" />
+              <BiMap className="absolute text-3xl top-8 right-0" />
               {fromIsFocus && (
                 <div
                   className="shadow-lg absolute bg-white w-full z-50"
@@ -101,7 +103,7 @@ const AirportTransfer = () => {
             <div className="relative">
               <label
                 htmlFor="pickUpDate"
-                className="normal-case ps-2 font-bold">
+                className="normal-case ps-2 font-bold text-xl">
                 Pick Up Date
               </label>
               <br />
@@ -113,18 +115,18 @@ const AirportTransfer = () => {
                   setStartDate(date);
                   setValue("pickUpDate", date); // Set the value using setValue
                 }} // Handle date change and update the state
-                className="w-full border-b p-2 "
+                className="w-[250px] border-b p-2 "
                 minDate={new Date()}
                 closeOnScroll={true}
                 placeholderText="Select a date"
               />
-              <BiCalendar className="absolute text-3xl top-10 right-0" />
+              <BiCalendar className="absolute text-3xl top-8 right-0" />
             </div>
             <div className=" relative">
               <label
                 htmlFor="pickUpTime"
-                className="normal-case ps-2 font-bold">
-                Pick Up At
+                className="normal-case ps-2 font-bold text-xl">
+                Pick Up Time
               </label>
               <select
                 id="pickUpTime"
@@ -231,68 +233,70 @@ const AirportTransfer = () => {
                 <option value="23:30">11:30 PM</option>
                 <option value="23:45">11:45 PM</option>
               </select>
-              <AiOutlineClockCircle className="absolute text-3xl top-10 right-0" />
+              <AiOutlineClockCircle className="absolute text-3xl top-8 right-0" />
+            </div>
+            <div className="relative px-3 ">
+              <label
+                htmlFor="trip"
+                className="ps-2 normal-case text-xl font-bold">
+                Trip Type
+              </label>
+              <input
+                type="text"
+                id="trip"
+                {...register("trip")}
+                className="w-full border-b p-2"
+                placeholder="Start typing trip type"
+                onFocus={() => setTripIsFocus(true)}
+                onBlur={() => {
+                  if (!isHovered) {
+                    setTripIsFocus(false);
+                  }
+                }}
+                value={tripInputValue}
+                onChange={(e) => {
+                  setTripInputValue(e.target.value);
+                  setValue("trip", e.target.value);
+                }}
+                ref={inputRef}
+              />
+              <PiAirplaneTiltBold className="absolute text-3xl top-8 right-10" />
+              {tripIsFocus && (
+                <div
+                  className="shadow-lg absolute bg-white w-full z-50"
+                  onMouseEnter={() => {
+                    setIsHovered(true);
+                  }}
+                  onMouseLeave={() => {
+                    setIsHovered(false);
+                  }}>
+                  {tripTypeSuggestions.map((suggestion, index) => {
+                    const isMatch =
+                      suggestion
+                        .toLowerCase()
+                        .indexOf(tripInputValue.toLowerCase()) > -1;
+                    return (
+                      <div key={index}>
+                        {isMatch && (
+                          <div
+                            className="p-2 hover:bg-gray-200 cursor-pointer"
+                            onClick={() => {
+                              setTripInputValue(suggestion);
+                              setValue("trip", suggestion);
+                              inputRef.current.focus();
+                            }}>
+                            {suggestion}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
             </div>
           </div>
-          <div className="relative w-3/5  px-3 ">
-            <label htmlFor="trip" className="ps-2 normal-case font-bold">
-              Trip Type
-            </label>
-            <input
-              type="text"
-              id="trip"
-              {...register("trip")}
-              className="w-full border-b p-2"
-              placeholder="Start typing trip type"
-              onFocus={() => setTripIsFocus(true)}
-              onBlur={() => {
-                if (!isHovered) {
-                  setTripIsFocus(false);
-                }
-              }}
-              value={tripInputValue}
-              onChange={(e) => {
-                setTripInputValue(e.target.value);
-                setValue("trip", e.target.value);
-              }}
-              ref={inputRef}
-            />
-            <PiAirplaneTiltBold className="absolute text-3xl top-10 right-4" />
-            {tripIsFocus && (
-              <div
-                className="shadow-lg absolute bg-white w-full z-50"
-                onMouseEnter={() => {
-                  setIsHovered(true);
-                }}
-                onMouseLeave={() => {
-                  setIsHovered(false);
-                }}>
-                {tripTypeSuggestions.map((suggestion, index) => {
-                  const isMatch =
-                    suggestion
-                      .toLowerCase()
-                      .indexOf(tripInputValue.toLowerCase()) > -1;
-                  return (
-                    <div key={index}>
-                      {isMatch && (
-                        <div
-                          className="p-2 hover:bg-gray-200 cursor-pointer"
-                          onClick={() => {
-                            setTripInputValue(suggestion);
-                            setValue("trip", suggestion);
-                            inputRef.current.focus();
-                          }}>
-                          {suggestion}
-                        </div>
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
-            )}
-          </div>
 
-          <div className="flex justify-center py-5">
+          <div className="flex justify-center pb-5">
             <button
               type="submit"
               className="bg-[#60a547]  text-white py-2 px-4 rounded">

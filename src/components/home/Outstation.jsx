@@ -48,30 +48,32 @@ const Outstation = () => {
       <Tabs selectedIndex={activeIndex} onSelect={handleTabSelect}>
         <TabList className="flex pt-2 gap-8 justify-center">
           <Tab
-            className={`no-underline text-[#60A547] cursor-pointer py-3 px-7 text-xl 
+            className={`no-underline text-[#60A547] cursor-pointer py-1 px-7 text-xl
                         ${activeIndex === 0 ? "active-tab" : "unactive-tab"}`}>
-            ONE WAY
+            One Way
           </Tab>
           <Tab
-            className={`no-underline text-[#60A547] cursor-pointer py-3 px-7 text-xl 
+            className={`no-underline text-[#60A547] cursor-pointer py-1 px-7 text-xl 
                         ${activeIndex === 1 ? "active-tab" : "unactive-tab"}`}>
-            ROUND TRIP
+            Round Trip
           </Tab>
         </TabList>
 
         <TabPanel className="w-full">
           <div className=" px-3 pt-2">
             <form onSubmit={handleSubmit(oneWaySubmit)}>
-              <div className="p-4 flex gap-4">
+              <div className="p-4 flex justify-between gap-14">
                 <div className="relative">
-                  <label htmlFor="from" className="normal-case ps-2 font-bold">
+                  <label
+                    htmlFor="from"
+                    className="normal-case ps-2 font-bold text-xl">
                     From
                   </label>
                   <input
                     type="text"
                     id="from"
                     {...register("from")}
-                    className="w-full border-b p-2"
+                    className="w-full border-b text-base p-2"
                     placeholder="Start typing city"
                     onFocus={() => setIsFocus(true)}
                     onBlur={() => {
@@ -86,7 +88,7 @@ const Outstation = () => {
                     }}
                     ref={inputRef}
                   />
-                  <BiMap className="absolute text-3xl top-10 right-0" />
+                  <BiMap className="absolute text-3xl top-8 right-0" />
                   {isFocus && (
                     <div
                       className="shadow-lg absolute bg-white w-full"
@@ -122,17 +124,19 @@ const Outstation = () => {
                 </div>
                 <AiOutlineSwap
                   onClick={handleSwap}
-                  className="text-4xl cursor-pointer mt-8"
+                  className="text-2xl cursor-pointer mt-8"
                 />
                 <div className=" relative">
-                  <label htmlFor="to" className="normal-case ps-2 font-bold">
+                  <label
+                    htmlFor="to"
+                    className="normal-case ps-2 font-bold text-xl">
                     To
                   </label>
                   <input
                     type="text"
                     id="to"
                     {...register("to")}
-                    className="w-full border-b p-2"
+                    className="w-full border-b text-base p-2"
                     placeholder="Start typing trip type"
                     onFocus={() => setToIsFocus(true)}
                     onBlur={() => {
@@ -147,7 +151,7 @@ const Outstation = () => {
                     }}
                     ref={inputRef}
                   />
-                  <BiMap className="absolute text-3xl top-10 right-0" />
+                  <BiMap className="absolute text-3xl top-8 right-0" />
                   {toIsFocus && (
                     <div
                       className="shadow-lg absolute bg-white w-full z-50"
@@ -184,7 +188,7 @@ const Outstation = () => {
                 <div className="relative">
                   <label
                     htmlFor="pickUpDate"
-                    className="normal-case ps-2 font-bold">
+                    className="normal-case ps-2 font-bold text-xl">
                     Pick Up Date
                   </label>
                   <br />
@@ -196,23 +200,23 @@ const Outstation = () => {
                       setStartDate(date);
                       setValue("pickUpDate", date); // Set the value using setValue
                     }} // Handle date change and update the state
-                    className="w-full border-b p-2 "
+                    className="w-full border-b text-base p-2 "
                     minDate={new Date()}
                     closeOnScroll={true}
                     placeholderText="Select a date"
                   />
-                  <BiCalendar className="absolute text-3xl top-10 right-0" />
+                  <BiCalendar className="absolute text-3xl top-8 right-0" />
                 </div>
                 <div className=" relative">
                   <label
                     htmlFor="pickUpTime"
-                    className="normal-case ps-2 font-bold">
-                    Pick Up At
+                    className="normal-case ps-2 font-bold text-xl">
+                    Pick Up Time
                   </label>
                   <select
                     id="pickUpTime"
                     {...register("pickUpTime", { required: true })}
-                    className="w-full border-b p-2 appearance-none"
+                    className="w-full border-b text-base p-2 appearance-none"
                     placeholder="Start typing Time"
                     required>
                     <option value="">Select Time</option>
@@ -314,7 +318,7 @@ const Outstation = () => {
                     <option value="23:30">11:30 PM</option>
                     <option value="23:45">11:45 PM</option>
                   </select>
-                  <AiOutlineClockCircle className="absolute text-3xl top-10 right-0" />
+                  <AiOutlineClockCircle className="absolute text-3xl top-8 right-0" />
                 </div>
               </div>
               <div className="flex justify-center pb-2">
@@ -333,14 +337,16 @@ const Outstation = () => {
             <form onSubmit={handleSubmit(RoundTripSubmit)}>
               <div className="p-4 flex gap-3">
                 <div className="relative">
-                  <label htmlFor="from" className="normal-case ps-2 font-bold">
+                  <label
+                    htmlFor="from"
+                    className="normal-case ps-2 font-bold text-xl">
                     From
                   </label>
                   <input
                     type="text"
                     id="from"
                     {...register("from")}
-                    className="w-full border-b p-2"
+                    className="w-full border-b text-base p-2"
                     placeholder="Start typing city"
                     onFocus={() => setIsFocus(true)}
                     onBlur={() => {
@@ -355,7 +361,7 @@ const Outstation = () => {
                     }}
                     ref={inputRef}
                   />
-                  <BiMap className="absolute text-3xl top-10 right-0" />
+                  <BiMap className="absolute text-3xl top-8 right-0" />
                   {isFocus && (
                     <div
                       className="shadow-lg absolute bg-white w-full"
@@ -391,17 +397,19 @@ const Outstation = () => {
                 </div>
                 <AiOutlineSwap
                   onClick={handleSwap}
-                  className="text-5xl cursor-pointer  mt-7"
+                  className="text-2xl cursor-pointer  my-auto mt-8"
                 />
                 <div className=" relative">
-                  <label htmlFor="to" className="normal-case ps-2 font-bold">
+                  <label
+                    htmlFor="to"
+                    className="normal-case ps-2 font-bold text-xl">
                     To
                   </label>
                   <input
                     type="text"
                     id="to"
                     {...register("to")}
-                    className="w-full border-b p-2"
+                    className="w-full border-b text-base p-2"
                     placeholder="Start typing trip type"
                     onFocus={() => setToIsFocus(true)}
                     onBlur={() => {
@@ -416,7 +424,7 @@ const Outstation = () => {
                     }}
                     ref={inputRef}
                   />
-                  <BiMap className="absolute text-3xl top-10 right-0" />
+                  <BiMap className="absolute text-3xl top-8 right-0" />
                   {toIsFocus && (
                     <div
                       className="shadow-lg absolute bg-white w-full z-50"
@@ -453,7 +461,7 @@ const Outstation = () => {
                 <div className="relative">
                   <label
                     htmlFor="pickUpDate"
-                    className="normal-case ps-2 font-bold">
+                    className="normal-case ps-2 font-bold text-xl">
                     Pick Up Date
                   </label>
                   <br />
@@ -465,20 +473,20 @@ const Outstation = () => {
                       setStartDate(date);
                       setValue("pickUpDate", date); // Set the value using setValue
                     }} // Handle date change and update the state
-                    className="w-full border-b p-2 "
+                    className="w-full border-b text-base p-2 "
                     minDate={new Date()}
                     closeOnScroll={true}
                     placeholderText="Select a date"
                   />
-                  <BiCalendar className="absolute text-3xl top-10 right-0" />
+                  <BiCalendar className="absolute text-3xl top-8 right-0" />
                 </div>
                 <div className="relative">
                   <label
                     htmlFor="pickUpDate"
-                    className="normal-case ps-2 font-bold">
+                    className="normal-case ps-2 font-bold text-xl">
                     Return Date
                   </label>
-
+                  <br />
                   <DatePicker
                     id="returnDate"
                     {...register("returnDate")}
@@ -487,24 +495,24 @@ const Outstation = () => {
                       setReturnDate(date);
                       setValue("returnDate", date); // Set the value using setValue
                     }} // Handle date change and update the state
-                    className="w-full border-b p-2 "
+                    className="w-full border-b text-base p-2 "
                     minDate={new Date()}
                     closeOnScroll={true}
                     placeholderText="Select a date"
                   />
 
-                  <BiCalendar className="absolute text-3xl top-10 right-10" />
+                  <BiCalendar className="absolute text-3xl top-8 right-0" />
                 </div>
                 <div className=" relative">
                   <label
                     htmlFor="pickUpTime"
-                    className="normal-case ps-2 font-bold">
-                    Pick Up At
+                    className="normal-case ps-2 font-bold text-xl">
+                    Pick Up Time
                   </label>
                   <select
                     id="pickUpTime"
                     {...register("pickUpTime", { required: true })}
-                    className="w-full border-b p-2 appearance-none"
+                    className="w-full border-b text-base p-2 appearance-none"
                     placeholder="Start typing Time"
                     required>
                     <option value="">Select Time</option>
@@ -606,10 +614,10 @@ const Outstation = () => {
                     <option value="23:30">11:30 PM</option>
                     <option value="23:45">11:45 PM</option>
                   </select>
-                  <AiOutlineClockCircle className="absolute text-3xl top-10 right-0" />
+                  <AiOutlineClockCircle className="absolute text-3xl top-8 right-0" />
                 </div>
               </div>
-              <div className="flex justify-center py-2">
+              <div className="flex justify-center pb-2">
                 <button
                   type="submit"
                   className="bg-[#60a547]  text-white py-2 px-4 rounded">

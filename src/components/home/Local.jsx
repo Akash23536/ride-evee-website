@@ -19,6 +19,24 @@ const Local = () => {
     "Chicago",
     "San Francisco",
     "Seattle",
+    "Yellapur",
+    "Yemmiganur",
+    "Yenagudde",
+    "Yerkheda",
+    "Yerraguntla",
+    "Yevla",
+    "Yol",
+    "Zahirabad",
+    "Zaidpur",
+    "Zalod",
+    "Zamania",
+    "Zamin Uthukuli",
+    "Zawlnuam",
+    "Ziauddin Pur",
+    "Zira",
+    "Zirakpur",
+    "Ziro",
+    "Zunheboto",
   ];
 
   const localSubmit = (data) => {
@@ -29,9 +47,11 @@ const Local = () => {
     <div className="w-full normal-case">
       <div className="px-3 pt-2">
         <form onSubmit={handleSubmit(localSubmit)}>
-          <div className="p-4 w-full flex justify-between  gap-14">
+          <div className="p-4 w-full flex justify-between  gap-48">
             <div className="relative">
-              <label htmlFor="from" className="normal-case ps-2 font-bold">
+              <label
+                htmlFor="from"
+                className="normal-case ps-2 font-bold text-xl">
                 From
               </label>
               <input
@@ -53,7 +73,7 @@ const Local = () => {
                 }}
                 ref={inputRef}
               />
-              <BiMap className="absolute text-3xl top-10 right-0" />
+              <BiMap className="absolute text-3xl top-8 right-0" />
               {isFocus && (
                 <div
                   className="shadow-lg absolute bg-white w-full"
@@ -63,26 +83,34 @@ const Local = () => {
                   onMouseLeave={() => {
                     setIsHovered(false);
                   }}>
-                  {suggestions.map((suggestion, index) => {
-                    const isMatch =
+                  {suggestions
+                    .filter((suggestion) =>
                       suggestion
                         .toLowerCase()
-                        .indexOf(inputValue.toLowerCase()) > -1;
-                    return (
-                      <div key={index}>
-                        {isMatch && (
-                          <div
-                            className="p-2 hover:bg-gray-200 cursor-pointer"
-                            onClick={() => {
-                              setValue("from", suggestion); // Set the value using setValue
-                              inputRef.current.focus();
-                            }}>
-                            {suggestion}
-                          </div>
-                        )}
-                      </div>
-                    );
-                  })}
+                        .includes(inputValue.toLowerCase())
+                    )
+                    .slice(0, 6)
+                    .map((suggestion, index) => {
+                      const isMatch = suggestion
+                        .toLowerCase()
+                        .includes(inputValue.toLowerCase());
+
+                      return (
+                        <div key={index}>
+                          {isMatch && (
+                            <div
+                              className="p-2 hover:bg-gray-200 cursor-pointer"
+                              onClick={() => {
+                                setInputValue(suggestion);
+                                setValue("from", suggestion); // Set the value using setValue
+                                inputRef.current.focus();
+                              }}>
+                              {suggestion}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
                 </div>
               )}
             </div>
@@ -90,7 +118,7 @@ const Local = () => {
             <div className="relative">
               <label
                 htmlFor="pickUpDate"
-                className="normal-case ps-2 font-bold">
+                className="normal-case ps-2 font-bold text-xl">
                 Pick Up Date
               </label>
               <br />
@@ -102,24 +130,24 @@ const Local = () => {
                   setStartDate(date);
                   setValue("pickUpDate", date); // Set the value using setValue
                 }} // Handle date change and update the state
-                className="w-full border-b p-2 "
+                className="w-[300px] border-b p-2 "
                 minDate={new Date()}
                 closeOnScroll={true}
                 placeholderText="Select a date"
               />
-              <BiCalendar className="absolute text-3xl zz top-10 right-4" />
+              <BiCalendar className="absolute text-3xl top-8 right-2" />
             </div>
 
             <div className=" relative">
               <label
                 htmlFor="pickUpTime"
-                className="normal-case ps-2 font-bold">
-                Pick Up At
+                className="normal-case ps-2 font-bold text-xl">
+                Pick Up Time
               </label>
               <select
                 id="pickUpTime"
                 {...register("pickUpTime", { required: true })}
-                className="w-full border-b p-2 appearance-none"
+                className="w-full border-b pe-10 p-2 appearance-none"
                 placeholder="Start typing Time"
                 required>
                 <option value="">Select Time</option>
@@ -221,7 +249,7 @@ const Local = () => {
                 <option value="23:30">11:30 PM</option>
                 <option value="23:45">11:45 PM</option>
               </select>
-              <AiOutlineClockCircle className="absolute text-3xl top-10 right-0" />
+              <AiOutlineClockCircle className="absolute text-3xl top-8 right-0" />
             </div>
           </div>
           <div className="flex justify-center pb-5">
