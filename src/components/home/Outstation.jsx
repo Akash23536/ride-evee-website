@@ -5,26 +5,21 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { BiCalendar, BiMap } from "react-icons/bi";
 import { AiOutlineClockCircle, AiOutlineSwap } from "react-icons/ai";
+import useSuggestions from "../../hooks/useSuggestions";
 
 const Outstation = () => {
-  const { handleSubmit, register, setValue, getValues } = useForm();
+  const { handleSubmit, register, setValue } = useForm();
   const [startDate, setStartDate] = useState(null);
   const [returnDate, setReturnDate] = useState(null);
   const [activeIndex, setActiveIndex] = React.useState(0);
   const [isFocus, setIsFocus] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const inputRef = useRef();
+
   const [inputValue, setInputValue] = useState("");
   const [toInputValue, setToInputValue] = useState("");
   const [toIsFocus, setToIsFocus] = useState(false);
-
-  const suggestions = [
-    "New York",
-    "Los Angeles",
-    "Chicago",
-    "San Francisco",
-    "Seattle",
-  ];
+  const [suggestions] = useSuggestions();
 
   const handleTabSelect = (index) => {
     setActiveIndex(index);
@@ -37,10 +32,8 @@ const Outstation = () => {
     console.log("Form data:", data);
   };
   const handleSwap = () => {
-    const fromValue = getValues("from");
-    const toValue = getValues("to");
-    setValue("from", toValue);
-    setValue("to", fromValue);
+    setInputValue(toInputValue);
+    setToInputValue(inputValue);
   };
 
   return (
@@ -76,6 +69,7 @@ const Outstation = () => {
                     className="w-full border-b text-base p-2"
                     placeholder="Start typing city"
                     onFocus={() => setIsFocus(true)}
+                    required
                     onBlur={() => {
                       if (!isHovered) {
                         setIsFocus(false);
@@ -98,27 +92,34 @@ const Outstation = () => {
                       onMouseLeave={() => {
                         setIsHovered(false);
                       }}>
-                      {suggestions.map((suggestion, index) => {
-                        const isMatch =
+                      {suggestions
+                        .filter((suggestion) =>
                           suggestion
                             .toLowerCase()
-                            .indexOf(inputValue.toLowerCase()) > -1;
-                        return (
-                          <div key={index}>
-                            {isMatch && (
-                              <div
-                                className="p-2 hover:bg-gray-200 cursor-pointer"
-                                onClick={() => {
-                                  setInputValue(suggestion);
-                                  setValue("from", suggestion);
-                                  inputRef.current.focus();
-                                }}>
-                                {suggestion}
-                              </div>
-                            )}
-                          </div>
-                        );
-                      })}
+                            .includes(inputValue.toLowerCase())
+                        )
+                        .slice(0, 6)
+                        .map((suggestion, index) => {
+                          const isMatch =
+                            suggestion
+                              .toLowerCase()
+                              .indexOf(inputValue.toLowerCase()) > -1;
+                          return (
+                            <div key={index}>
+                              {isMatch && (
+                                <div
+                                  className="p-2 hover:bg-gray-200 cursor-pointer"
+                                  onClick={() => {
+                                    setInputValue(suggestion);
+                                    setValue("from", suggestion);
+                                    inputRef.current.focus();
+                                  }}>
+                                  {suggestion}
+                                </div>
+                              )}
+                            </div>
+                          );
+                        })}
                     </div>
                   )}
                 </div>
@@ -139,6 +140,7 @@ const Outstation = () => {
                     className="w-full border-b text-base p-2"
                     placeholder="Start typing trip type"
                     onFocus={() => setToIsFocus(true)}
+                    required
                     onBlur={() => {
                       if (!isHovered) {
                         setToIsFocus(false);
@@ -146,7 +148,7 @@ const Outstation = () => {
                     }}
                     value={toInputValue}
                     onChange={(e) => {
-                      setInputValue(e.target.value);
+                      setToInputValue(e.target.value);
                       setValue("to", e.target.value); // Set the value using setValue
                     }}
                     ref={inputRef}
@@ -161,27 +163,34 @@ const Outstation = () => {
                       onMouseLeave={() => {
                         setIsHovered(false);
                       }}>
-                      {suggestions.map((suggestion, index) => {
-                        const isMatch =
+                      {suggestions
+                        .filter((suggestion) =>
                           suggestion
                             .toLowerCase()
-                            .indexOf(toInputValue.toLowerCase()) > -1;
-                        return (
-                          <div key={index}>
-                            {isMatch && (
-                              <div
-                                className="p-2 hover:bg-gray-200 cursor-pointer"
-                                onClick={() => {
-                                  setToInputValue(suggestion);
-                                  setValue("to", suggestion);
-                                  inputRef.current.focus();
-                                }}>
-                                {suggestion}
-                              </div>
-                            )}
-                          </div>
-                        );
-                      })}
+                            .includes(toInputValue.toLowerCase())
+                        )
+                        .slice(0, 6)
+                        .map((suggestion, index) => {
+                          const isMatch =
+                            suggestion
+                              .toLowerCase()
+                              .indexOf(toInputValue.toLowerCase()) > -1;
+                          return (
+                            <div key={index}>
+                              {isMatch && (
+                                <div
+                                  className="p-2 hover:bg-gray-200 cursor-pointer"
+                                  onClick={() => {
+                                    setToInputValue(suggestion);
+                                    setValue("to", suggestion);
+                                    inputRef.current.focus();
+                                  }}>
+                                  {suggestion}
+                                </div>
+                              )}
+                            </div>
+                          );
+                        })}
                     </div>
                   )}
                 </div>
@@ -203,6 +212,7 @@ const Outstation = () => {
                     className="w-full border-b text-base p-2 "
                     minDate={new Date()}
                     closeOnScroll={true}
+                    required
                     placeholderText="Select a date"
                   />
                   <BiCalendar className="absolute text-3xl top-8 right-0" />
@@ -220,103 +230,103 @@ const Outstation = () => {
                     placeholder="Start typing Time"
                     required>
                     <option value="">Select Time</option>
-                    <option value="00:00">12:00 AM</option>
-                    <option value="00:15">12:15 AM</option>
-                    <option value="00:30">12:30 AM</option>
-                    <option value="00:45">12:45 AM</option>
-                    <option value="01:00">1:00 AM</option>
-                    <option value="01:15">1:15 AM</option>
-                    <option value="01:30">1:30 AM</option>
-                    <option value="01:45">1:45 AM</option>
-                    <option value="02:00">2:00 AM</option>
-                    <option value="02:15">2:15 AM</option>
-                    <option value="02:30">2:30 AM</option>
-                    <option value="02:45">2:45 AM</option>
-                    <option value="03:00">3:00 AM</option>
-                    <option value="03:15">3:15 AM</option>
-                    <option value="03:45">3:45 AM</option>
-                    <option value="04:00">4:00 AM</option>
-                    <option value="04:15">4:15 AM</option>
-                    <option value="04:30">4:30 AM</option>
-                    <option value="04:45">4:45 AM</option>
-                    <option value="05:00">5:00 AM</option>
-                    <option value="05:00">5:00 AM</option>
-                    <option value="05:15">5:15 AM</option>
-                    <option value="05:30">5:30 AM</option>
-                    <option value="05:45">5:45 AM</option>
-                    <option value="06:00">6:00 AM</option>
-                    <option value="06:15">6:15 AM</option>
-                    <option value="06:30">6:30 AM</option>
-                    <option value="06:45">6:45 AM</option>
-                    <option value="07:00">7:00 AM</option>
-                    <option value="07:15">7:15 AM</option>
-                    <option value="07:30">7:30 AM</option>
-                    <option value="07:45">7:45 AM</option>
-                    <option value="08:00">8:00 AM</option>
-                    <option value="08:15">8:15 AM</option>
-                    <option value="08:30">8:30 AM</option>
-                    <option value="08:45">8:45 AM</option>
-                    <option value="09:00">9:00 AM</option>
-                    <option value="09:15">9:15 AM</option>
-                    <option value="09:30">9:30 AM</option>
-                    <option value="09:45">9:45 AM</option>
-                    <option value="10:00">10:00 AM</option>
-                    <option value="10:15">10:15 AM</option>
-                    <option value="10:30">10:30 AM</option>
-                    <option value="10:45">10:45 AM</option>
-                    <option value="11:00">11:00 AM</option>
-                    <option value="11:15">11:15 AM</option>
-                    <option value="11:30">11:30 AM</option>
-                    <option value="11:45">11:45 AM</option>
-                    <option value="11:45">12:00 PM</option>
-                    <option value="12:00">12:00 PM</option>
-                    <option value="12:15">12:15 PM</option>
-                    <option value="12:30">12:30 PM</option>
-                    <option value="12:45">12:45 PM</option>
-                    <option value="13:00">1:00 PM</option>
-                    <option value="13:15">1:15 PM</option>
-                    <option value="13:30">1:30 PM</option>
-                    <option value="13:45">1:45 PM</option>
-                    <option value="14:00">2:00 PM</option>
-                    <option value="14:15">2:15 PM</option>
-                    <option value="14:30">2:30 PM</option>
-                    <option value="14:45">2:45 PM</option>
-                    <option value="15:00">3:00 PM</option>
-                    <option value="15:15">3:15 PM</option>
-                    <option value="15:30">3:30 PM</option>
-                    <option value="15:45">3:45 PM</option>
-                    <option value="16:00">4:00 PM</option>
-                    <option value="16:15">4:15 PM</option>
-                    <option value="16:30">4:30 PM</option>
-                    <option value="16:45">4:45 PM</option>
-                    <option value="17:00">5:00 PM</option>
-                    <option value="17:15">5:15 PM</option>
-                    <option value="17:30">5:30 PM</option>
-                    <option value="17:45">5:45 PM</option>
-                    <option value="18:00">6:00 PM</option>
-                    <option value="18:15">6:15 PM</option>
-                    <option value="18:30">6:30 PM</option>
-                    <option value="18:45">6:45 PM</option>
-                    <option value="19:00">7:00 PM</option>
-                    <option value="19:15">7:15 PM</option>
-                    <option value="19:30">7:30 PM</option>
-                    <option value="19:45">7:45 PM</option>
-                    <option value="20:00">8:00 PM</option>
-                    <option value="20:15">8:15 PM</option>
-                    <option value="20:30">8:30 PM</option>
-                    <option value="20:45">8:45 PM</option>
-                    <option value="21:00">9:00 PM</option>
-                    <option value="21:15">9:15 PM</option>
-                    <option value="21:30">9:30 PM</option>
-                    <option value="21:45">9:45 PM</option>
-                    <option value="22:00">10:00 PM</option>
-                    <option value="22:15">10:15 PM</option>
-                    <option value="22:30">10:30 PM</option>
-                    <option value="22:45">10:45 PM</option>
-                    <option value="23:00">11:00 PM</option>
-                    <option value="23:15">11:15 PM</option>
-                    <option value="23:30">11:30 PM</option>
-                    <option value="23:45">11:45 PM</option>
+                    <option value="">Select Time</option>
+                    <option value="12.00 AM">12:00 AM</option>
+                    <option value="12.15 AM">12:15 AM</option>
+                    <option value="12.30 AM">12:30 AM</option>
+                    <option value="12.45 AM">12:45 AM</option>
+                    <option value="1.00 AM">1:00 AM</option>
+                    <option value="01:15 AM">1:15 AM</option>
+                    <option value="01:30 AM">1:30 AM</option>
+                    <option value="01:45 AM">1:45 AM</option>
+                    <option value="02:00 AM">2:00 AM</option>
+                    <option value="02:15 AM">2:15 AM</option>
+                    <option value="02:30 AM">2:30 AM</option>
+                    <option value="02:45 AM">2:45 AM</option>
+                    <option value="03:00 AM">3:00 AM</option>
+                    <option value="03:15 AM">3:15 AM</option>
+                    <option value="03:45 AM">3:45 AM</option>
+                    <option value="04:00 AM">4:00 AM</option>
+                    <option value="04:15 AM">4:15 AM</option>
+                    <option value="04:30 AM">4:30 AM</option>
+                    <option value="04:45 AM">4:45 AM</option>
+                    <option value="05:00 AM">5:00 AM</option>
+                    <option value="05:00 AM">5:00 AM</option>
+                    <option value="05:15 AM">5:15 AM</option>
+                    <option value="05:30 AM">5:30 AM</option>
+                    <option value="05:45 AM">5:45 AM</option>
+                    <option value="06:00 AM">6:00 AM</option>
+                    <option value="06:15 AM">6:15 AM</option>
+                    <option value="06:30 AM">6:30 AM</option>
+                    <option value="06:45 AM">6:45 AM</option>
+                    <option value="07:00 AM">7:00 AM</option>
+                    <option value="07:15 AM">7:15 AM</option>
+                    <option value="07:30 AM">7:30 AM</option>
+                    <option value="07:45 AM">7:45 AM</option>
+                    <option value="08:00 AM">8:00 AM</option>
+                    <option value="08:15 AM">8:15 AM</option>
+                    <option value="08:30 AM">8:30 AM</option>
+                    <option value="08:45 AM">8:45 AM</option>
+                    <option value="09:00 AM">9:00 AM</option>
+                    <option value="09:15 AM">9:15 AM</option>
+                    <option value="09:30 AM">9:30 AM</option>
+                    <option value="09:45 AM">9:45 AM</option>
+                    <option value="10:00 AM">10:00 AM</option>
+                    <option value="10:15 AM">10:15 AM</option>
+                    <option value="10:30 AM">10:30 AM</option>
+                    <option value="10:45 AM">10:45 AM</option>
+                    <option value="11:00 AM">11:00 AM</option>
+                    <option value="11:15 AM">11:15 AM</option>
+                    <option value="11:30 AM">11:30 AM</option>
+                    <option value="11:45 AM">11:45 AM</option>
+                    <option value="12.00 PM">12:00 PM</option>
+                    <option value="12.15 PM">12:15 PM</option>
+                    <option value="12.30 PM">12:30 PM</option>
+                    <option value="12.45 PM">12:45 PM</option>
+                    <option value="1.00 PM">1:00 PM</option>
+                    <option value="01:15 PM">1:15 PM</option>
+                    <option value="01:30 PM">1:30 PM</option>
+                    <option value="01:45 PM">1:45 PM</option>
+                    <option value="02:00 PM">2:00 PM</option>
+                    <option value="02:15 PM">2:15 PM</option>
+                    <option value="02:30 PM">2:30 PM</option>
+                    <option value="02:45 PM">2:45 PM</option>
+                    <option value="03:00 PM">3:00 PM</option>
+                    <option value="03:15 PM">3:15 PM</option>
+                    <option value="03:45 PM">3:45 PM</option>
+                    <option value="04:00 PM">4:00 PM</option>
+                    <option value="04:15 PM">4:15 PM</option>
+                    <option value="04:30 PM">4:30 PM</option>
+                    <option value="04:45 PM">4:45 PM</option>
+                    <option value="05:00 PM">5:00 PM</option>
+                    <option value="05:00 PM">5:00 PM</option>
+                    <option value="05:15 PM">5:15 PM</option>
+                    <option value="05:30 PM">5:30 PM</option>
+                    <option value="05:45 PM">5:45 PM</option>
+                    <option value="06:00 PM">6:00 PM</option>
+                    <option value="06:15 PM">6:15 PM</option>
+                    <option value="06:30 PM">6:30 PM</option>
+                    <option value="06:45 PM">6:45 PM</option>
+                    <option value="07:00 PM">7:00 PM</option>
+                    <option value="07:15 PM">7:15 PM</option>
+                    <option value="07:30 PM">7:30 PM</option>
+                    <option value="07:45 PM">7:45 PM</option>
+                    <option value="08:00 PM">8:00 PM</option>
+                    <option value="08:15 PM">8:15 PM</option>
+                    <option value="08:30 PM">8:30 PM</option>
+                    <option value="08:45 PM">8:45 PM</option>
+                    <option value="09:00 PM">9:00 PM</option>
+                    <option value="09:15 PM">9:15 PM</option>
+                    <option value="09:30 PM">9:30 PM</option>
+                    <option value="09:45 PM">9:45 PM</option>
+                    <option value="10:00 PM">10:00 PM</option>
+                    <option value="10:15 PM">10:15 PM</option>
+                    <option value="10:30 PM">10:30 PM</option>
+                    <option value="10:45 PM">10:45 PM</option>
+                    <option value="11:00 PM">11:00 PM</option>
+                    <option value="11:15 PM">11:15 PM</option>
+                    <option value="11:30 PM">11:30 AM</option>
+                    <option value="11:45 PM">11:45 PM</option>
                   </select>
                   <AiOutlineClockCircle className="absolute text-3xl top-8 right-0" />
                 </div>
@@ -349,6 +359,7 @@ const Outstation = () => {
                     className="w-full border-b text-base p-2"
                     placeholder="Start typing city"
                     onFocus={() => setIsFocus(true)}
+                    required
                     onBlur={() => {
                       if (!isHovered) {
                         setIsFocus(false);
@@ -371,27 +382,34 @@ const Outstation = () => {
                       onMouseLeave={() => {
                         setIsHovered(false);
                       }}>
-                      {suggestions.map((suggestion, index) => {
-                        const isMatch =
+                      {suggestions
+                        .filter((suggestion) =>
                           suggestion
                             .toLowerCase()
-                            .indexOf(inputValue.toLowerCase()) > -1;
-                        return (
-                          <div key={index}>
-                            {isMatch && (
-                              <div
-                                className="p-2 hover:bg-gray-200 cursor-pointer"
-                                onClick={() => {
-                                  setInputValue(suggestion);
-                                  setValue("from", suggestion);
-                                  inputRef.current.focus();
-                                }}>
-                                {suggestion}
-                              </div>
-                            )}
-                          </div>
-                        );
-                      })}
+                            .includes(inputValue.toLowerCase())
+                        )
+                        .slice(0, 6)
+                        .map((suggestion, index) => {
+                          const isMatch =
+                            suggestion
+                              .toLowerCase()
+                              .indexOf(inputValue.toLowerCase()) > -1;
+                          return (
+                            <div key={index}>
+                              {isMatch && (
+                                <div
+                                  className="p-2 hover:bg-gray-200 cursor-pointer"
+                                  onClick={() => {
+                                    setInputValue(suggestion);
+                                    setValue("from", suggestion);
+                                    inputRef.current.focus();
+                                  }}>
+                                  {suggestion}
+                                </div>
+                              )}
+                            </div>
+                          );
+                        })}
                     </div>
                   )}
                 </div>
@@ -412,6 +430,7 @@ const Outstation = () => {
                     className="w-full border-b text-base p-2"
                     placeholder="Start typing trip type"
                     onFocus={() => setToIsFocus(true)}
+                    required
                     onBlur={() => {
                       if (!isHovered) {
                         setToIsFocus(false);
@@ -419,7 +438,7 @@ const Outstation = () => {
                     }}
                     value={toInputValue}
                     onChange={(e) => {
-                      setInputValue(e.target.value);
+                      setToInputValue(e.target.value);
                       setValue("to", e.target.value); // Set the value using setValue
                     }}
                     ref={inputRef}
@@ -434,27 +453,34 @@ const Outstation = () => {
                       onMouseLeave={() => {
                         setIsHovered(false);
                       }}>
-                      {suggestions.map((suggestion, index) => {
-                        const isMatch =
+                      {suggestions
+                        .filter((suggestion) =>
                           suggestion
                             .toLowerCase()
-                            .indexOf(toInputValue.toLowerCase()) > -1;
-                        return (
-                          <div key={index}>
-                            {isMatch && (
-                              <div
-                                className="p-2 hover:bg-gray-200 cursor-pointer"
-                                onClick={() => {
-                                  setToInputValue(suggestion);
-                                  setValue("to", suggestion);
-                                  inputRef.current.focus();
-                                }}>
-                                {suggestion}
-                              </div>
-                            )}
-                          </div>
-                        );
-                      })}
+                            .includes(toInputValue.toLowerCase())
+                        )
+                        .slice(0, 6)
+                        .map((suggestion, index) => {
+                          const isMatch =
+                            suggestion
+                              .toLowerCase()
+                              .indexOf(toInputValue.toLowerCase()) > -1;
+                          return (
+                            <div key={index}>
+                              {isMatch && (
+                                <div
+                                  className="p-2 hover:bg-gray-200 cursor-pointer"
+                                  onClick={() => {
+                                    setToInputValue(suggestion);
+                                    setValue("to", suggestion);
+                                    inputRef.current.focus();
+                                  }}>
+                                  {suggestion}
+                                </div>
+                              )}
+                            </div>
+                          );
+                        })}
                     </div>
                   )}
                 </div>
@@ -477,6 +503,7 @@ const Outstation = () => {
                     minDate={new Date()}
                     closeOnScroll={true}
                     placeholderText="Select a date"
+                    required
                   />
                   <BiCalendar className="absolute text-3xl top-8 right-0" />
                 </div>
@@ -499,6 +526,7 @@ const Outstation = () => {
                     minDate={new Date()}
                     closeOnScroll={true}
                     placeholderText="Select a date"
+                    required
                   />
 
                   <BiCalendar className="absolute text-3xl top-8 right-0" />
@@ -516,103 +544,102 @@ const Outstation = () => {
                     placeholder="Start typing Time"
                     required>
                     <option value="">Select Time</option>
-                    <option value="00:00">12:00 AM</option>
-                    <option value="00:15">12:15 AM</option>
-                    <option value="00:30">12:30 AM</option>
-                    <option value="00:45">12:45 AM</option>
-                    <option value="01:00">1:00 AM</option>
-                    <option value="01:15">1:15 AM</option>
-                    <option value="01:30">1:30 AM</option>
-                    <option value="01:45">1:45 AM</option>
-                    <option value="02:00">2:00 AM</option>
-                    <option value="02:15">2:15 AM</option>
-                    <option value="02:30">2:30 AM</option>
-                    <option value="02:45">2:45 AM</option>
-                    <option value="03:00">3:00 AM</option>
-                    <option value="03:15">3:15 AM</option>
-                    <option value="03:45">3:45 AM</option>
-                    <option value="04:00">4:00 AM</option>
-                    <option value="04:15">4:15 AM</option>
-                    <option value="04:30">4:30 AM</option>
-                    <option value="04:45">4:45 AM</option>
-                    <option value="05:00">5:00 AM</option>
-                    <option value="05:00">5:00 AM</option>
-                    <option value="05:15">5:15 AM</option>
-                    <option value="05:30">5:30 AM</option>
-                    <option value="05:45">5:45 AM</option>
-                    <option value="06:00">6:00 AM</option>
-                    <option value="06:15">6:15 AM</option>
-                    <option value="06:30">6:30 AM</option>
-                    <option value="06:45">6:45 AM</option>
-                    <option value="07:00">7:00 AM</option>
-                    <option value="07:15">7:15 AM</option>
-                    <option value="07:30">7:30 AM</option>
-                    <option value="07:45">7:45 AM</option>
-                    <option value="08:00">8:00 AM</option>
-                    <option value="08:15">8:15 AM</option>
-                    <option value="08:30">8:30 AM</option>
-                    <option value="08:45">8:45 AM</option>
-                    <option value="09:00">9:00 AM</option>
-                    <option value="09:15">9:15 AM</option>
-                    <option value="09:30">9:30 AM</option>
-                    <option value="09:45">9:45 AM</option>
-                    <option value="10:00">10:00 AM</option>
-                    <option value="10:15">10:15 AM</option>
-                    <option value="10:30">10:30 AM</option>
-                    <option value="10:45">10:45 AM</option>
-                    <option value="11:00">11:00 AM</option>
-                    <option value="11:15">11:15 AM</option>
-                    <option value="11:30">11:30 AM</option>
-                    <option value="11:45">11:45 AM</option>
-                    <option value="11:45">12:00 PM</option>
-                    <option value="12:00">12:00 PM</option>
-                    <option value="12:15">12:15 PM</option>
-                    <option value="12:30">12:30 PM</option>
-                    <option value="12:45">12:45 PM</option>
-                    <option value="13:00">1:00 PM</option>
-                    <option value="13:15">1:15 PM</option>
-                    <option value="13:30">1:30 PM</option>
-                    <option value="13:45">1:45 PM</option>
-                    <option value="14:00">2:00 PM</option>
-                    <option value="14:15">2:15 PM</option>
-                    <option value="14:30">2:30 PM</option>
-                    <option value="14:45">2:45 PM</option>
-                    <option value="15:00">3:00 PM</option>
-                    <option value="15:15">3:15 PM</option>
-                    <option value="15:30">3:30 PM</option>
-                    <option value="15:45">3:45 PM</option>
-                    <option value="16:00">4:00 PM</option>
-                    <option value="16:15">4:15 PM</option>
-                    <option value="16:30">4:30 PM</option>
-                    <option value="16:45">4:45 PM</option>
-                    <option value="17:00">5:00 PM</option>
-                    <option value="17:15">5:15 PM</option>
-                    <option value="17:30">5:30 PM</option>
-                    <option value="17:45">5:45 PM</option>
-                    <option value="18:00">6:00 PM</option>
-                    <option value="18:15">6:15 PM</option>
-                    <option value="18:30">6:30 PM</option>
-                    <option value="18:45">6:45 PM</option>
-                    <option value="19:00">7:00 PM</option>
-                    <option value="19:15">7:15 PM</option>
-                    <option value="19:30">7:30 PM</option>
-                    <option value="19:45">7:45 PM</option>
-                    <option value="20:00">8:00 PM</option>
-                    <option value="20:15">8:15 PM</option>
-                    <option value="20:30">8:30 PM</option>
-                    <option value="20:45">8:45 PM</option>
-                    <option value="21:00">9:00 PM</option>
-                    <option value="21:15">9:15 PM</option>
-                    <option value="21:30">9:30 PM</option>
-                    <option value="21:45">9:45 PM</option>
-                    <option value="22:00">10:00 PM</option>
-                    <option value="22:15">10:15 PM</option>
-                    <option value="22:30">10:30 PM</option>
-                    <option value="22:45">10:45 PM</option>
-                    <option value="23:00">11:00 PM</option>
-                    <option value="23:15">11:15 PM</option>
-                    <option value="23:30">11:30 PM</option>
-                    <option value="23:45">11:45 PM</option>
+                    <option value="12.00 AM">12:00 AM</option>
+                    <option value="12.15 AM">12:15 AM</option>
+                    <option value="12.30 AM">12:30 AM</option>
+                    <option value="12.45 AM">12:45 AM</option>
+                    <option value="1.00 AM">1:00 AM</option>
+                    <option value="01:15 AM">1:15 AM</option>
+                    <option value="01:30 AM">1:30 AM</option>
+                    <option value="01:45 AM">1:45 AM</option>
+                    <option value="02:00 AM">2:00 AM</option>
+                    <option value="02:15 AM">2:15 AM</option>
+                    <option value="02:30 AM">2:30 AM</option>
+                    <option value="02:45 AM">2:45 AM</option>
+                    <option value="03:00 AM">3:00 AM</option>
+                    <option value="03:15 AM">3:15 AM</option>
+                    <option value="03:45 AM">3:45 AM</option>
+                    <option value="04:00 AM">4:00 AM</option>
+                    <option value="04:15 AM">4:15 AM</option>
+                    <option value="04:30 AM">4:30 AM</option>
+                    <option value="04:45 AM">4:45 AM</option>
+                    <option value="05:00 AM">5:00 AM</option>
+                    <option value="05:00 AM">5:00 AM</option>
+                    <option value="05:15 AM">5:15 AM</option>
+                    <option value="05:30 AM">5:30 AM</option>
+                    <option value="05:45 AM">5:45 AM</option>
+                    <option value="06:00 AM">6:00 AM</option>
+                    <option value="06:15 AM">6:15 AM</option>
+                    <option value="06:30 AM">6:30 AM</option>
+                    <option value="06:45 AM">6:45 AM</option>
+                    <option value="07:00 AM">7:00 AM</option>
+                    <option value="07:15 AM">7:15 AM</option>
+                    <option value="07:30 AM">7:30 AM</option>
+                    <option value="07:45 AM">7:45 AM</option>
+                    <option value="08:00 AM">8:00 AM</option>
+                    <option value="08:15 AM">8:15 AM</option>
+                    <option value="08:30 AM">8:30 AM</option>
+                    <option value="08:45 AM">8:45 AM</option>
+                    <option value="09:00 AM">9:00 AM</option>
+                    <option value="09:15 AM">9:15 AM</option>
+                    <option value="09:30 AM">9:30 AM</option>
+                    <option value="09:45 AM">9:45 AM</option>
+                    <option value="10:00 AM">10:00 AM</option>
+                    <option value="10:15 AM">10:15 AM</option>
+                    <option value="10:30 AM">10:30 AM</option>
+                    <option value="10:45 AM">10:45 AM</option>
+                    <option value="11:00 AM">11:00 AM</option>
+                    <option value="11:15 AM">11:15 AM</option>
+                    <option value="11:30 AM">11:30 AM</option>
+                    <option value="11:45 AM">11:45 AM</option>
+                    <option value="12.00 PM">12:00 PM</option>
+                    <option value="12.15 PM">12:15 PM</option>
+                    <option value="12.30 PM">12:30 PM</option>
+                    <option value="12.45 PM">12:45 PM</option>
+                    <option value="1.00 PM">1:00 PM</option>
+                    <option value="01:15 PM">1:15 PM</option>
+                    <option value="01:30 PM">1:30 PM</option>
+                    <option value="01:45 PM">1:45 PM</option>
+                    <option value="02:00 PM">2:00 PM</option>
+                    <option value="02:15 PM">2:15 PM</option>
+                    <option value="02:30 PM">2:30 PM</option>
+                    <option value="02:45 PM">2:45 PM</option>
+                    <option value="03:00 PM">3:00 PM</option>
+                    <option value="03:15 PM">3:15 PM</option>
+                    <option value="03:45 PM">3:45 PM</option>
+                    <option value="04:00 PM">4:00 PM</option>
+                    <option value="04:15 PM">4:15 PM</option>
+                    <option value="04:30 PM">4:30 PM</option>
+                    <option value="04:45 PM">4:45 PM</option>
+                    <option value="05:00 PM">5:00 PM</option>
+                    <option value="05:00 PM">5:00 PM</option>
+                    <option value="05:15 PM">5:15 PM</option>
+                    <option value="05:30 PM">5:30 PM</option>
+                    <option value="05:45 PM">5:45 PM</option>
+                    <option value="06:00 PM">6:00 PM</option>
+                    <option value="06:15 PM">6:15 PM</option>
+                    <option value="06:30 PM">6:30 PM</option>
+                    <option value="06:45 PM">6:45 PM</option>
+                    <option value="07:00 PM">7:00 PM</option>
+                    <option value="07:15 PM">7:15 PM</option>
+                    <option value="07:30 PM">7:30 PM</option>
+                    <option value="07:45 PM">7:45 PM</option>
+                    <option value="08:00 PM">8:00 PM</option>
+                    <option value="08:15 PM">8:15 PM</option>
+                    <option value="08:30 PM">8:30 PM</option>
+                    <option value="08:45 PM">8:45 PM</option>
+                    <option value="09:00 PM">9:00 PM</option>
+                    <option value="09:15 PM">9:15 PM</option>
+                    <option value="09:30 PM">9:30 PM</option>
+                    <option value="09:45 PM">9:45 PM</option>
+                    <option value="10:00 PM">10:00 PM</option>
+                    <option value="10:15 PM">10:15 PM</option>
+                    <option value="10:30 PM">10:30 PM</option>
+                    <option value="10:45 PM">10:45 PM</option>
+                    <option value="11:00 PM">11:00 PM</option>
+                    <option value="11:15 PM">11:15 PM</option>
+                    <option value="11:30 PM">11:30 AM</option>
+                    <option value="11:45 PM">11:45 PM</option>
                   </select>
                   <AiOutlineClockCircle className="absolute text-3xl top-8 right-0" />
                 </div>

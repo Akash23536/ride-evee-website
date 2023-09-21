@@ -14,7 +14,7 @@ const Banner = () => {
       .then((res) => res.json())
       .then((data) => {
         setBanImg(data);
-        console.log(data);
+        // console.log(data);
       });
   }, []);
 
@@ -28,7 +28,8 @@ const Banner = () => {
           disableOnInteraction: false,
         }}
         modules={[Pagination, EffectFade, Autoplay]}
-        pagination={{ clickable: true }}>
+        pagination={{ clickable: true }}
+        className="my-swiper">
         {banImg.map((banner, index) => (
           <SwiperSlide key={index}>
             <img

@@ -23,3 +23,9 @@
   filter: blur(4px); /* Adjust the blur amount as needed */
   pointer-events: none; /* Prevent interaction with the blurred background */
 }
+.my-swiper .swiper-pagination-bullet {
+  width: 30px;
+  height: 30px;
+  margin: 0 5px;
+  background-color: #60a547;
+}
