@@ -70,7 +70,7 @@ const SignUp = () => {
           <img
             src={group}
             alt=""
-            className="absolute bottom-0 left-0 w-[700px] "
+            className="absolute bottom-0 left-0 md:w-[2/3] "
             style={{
               background: `linear-gradient(199deg, #60A547 49.27%, #D5F5C9 100%)`,
             }}
@@ -132,6 +132,11 @@ h-[52.229px] text-[#060606] my-2 font-semibold bg-white p-4 text-center flex ite
             className="w-[605px] py-2 my-2 bg-transparent border-b border-black outline-none focus:outline-none"
           />
           <input
+            type="last name"
+            placeholder="Last name"
+            className="w-[605px] py-2 my-2 bg-transparent border-b border-black outline-none focus:outline-none"
+          />
+          <input
             type="email"
             placeholder="Email"
             className="w-[605px] py-2 my-2 bg-transparent border-b border-black outline-none focus:outline-none"
@@ -143,7 +148,7 @@ h-[52.229px] text-[#060606] my-2 font-semibold bg-white p-4 text-center flex ite
           />
         </div>
 
-        <div className="  justify-center items-center flex flex-col h-[52.229px]">
+        <div className="  justify-center items-center flex flex-col h-[52.229px] my-4">
           <button className="w-[605.851px] bg-[#60A547] my-2 rounded-md p-4 text-center flex items-center justify-center">
             <p
               className="text-center"
